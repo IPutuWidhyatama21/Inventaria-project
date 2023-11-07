@@ -5,12 +5,12 @@
 }
 
 .sidebar-design {
-    background-color: #010094;
+    background-color: #9d6800ce;
     height: 100vh;
 }
 
 .logo img {
-    width: 60%;
+    width: 40%;
     height: auto;
     margin-top: 20px;
 }
@@ -22,7 +22,7 @@
 }
 
 .dasboard:hover {
-    color: #00C2FF;
+    color: rgb(255, 208, 0);
     text-decoration: none;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .dasboard-design:hover {
-    color: #00C2FF;
+    color: #ffdc7d;
 }
 
 .manage-user {
@@ -44,11 +44,11 @@
 }
 
 .manage-user:hover {
-    color: #00C2FF;
+    color: rgb(255, 208, 0);
 }
 
 .active-items {
-    color: #00C2FF;
+    color: rgb(255, 208, 0);
     transition: linear 0.5s;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .search-layout button {
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
 }
 
 .profile-layout {
@@ -84,7 +84,7 @@
 }
 
 .profile-layout .fa-circle-user {
-    color: #010094;
+    color: rgb(255, 170, 0);
     width: 40px;
     height: 40px;
     margin-top: -1%;
@@ -110,12 +110,12 @@
 }
 
 .btn-add button {
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
     transition: linear .5s;
 }
 
 .btn-add button:hover {
-    background-image: linear-gradient(145deg, blue, #00C2FF);
+    background-image: linear-gradient(145deg, rgb(255, 170, 0), #ffdc7d);
     scale: 1.1;
 }
 
@@ -124,7 +124,7 @@
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #010094;
+    background-color: rgb(255, 170, 0);
     color: white;
 }
 
@@ -143,7 +143,7 @@
 
 /* Design Putra */
 .save-button button {
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
 }
 .inputGambar input[type = 'file'] {
     display: none;
@@ -201,7 +201,7 @@
     border-radius: 100%;
     width: 50px;
     height: 50px;
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
 }
 .fa-camera {
     width: 20px;
@@ -213,7 +213,7 @@
 }
 
 .save-buttonedit button{
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
 }
 
 .cancel-buttonedit {
@@ -267,22 +267,22 @@
 }
 
 .btn-search {
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
     transition: linear 0.3s;
 }
 
 .btn-search:hover {
-    background-image: linear-gradient(-45deg, #00C2FF, blue);
+    background-image: linear-gradient(-45deg, #ffdc7d, rgb(255, 170, 0));
     scale: 1.1;
 }
 
 .save-btn {
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
     transition: all 0.6s;
 }
 
 .save-btn:hover {
-    background-image: linear-gradient(-45deg, #00C2FF, blue);
+    background-image: linear-gradient(-45deg, #ffdc7d, rgb(255, 170, 0));
 }
 
 .cancel-btn {
@@ -301,13 +301,13 @@
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    background-image: linear-gradient(145deg, #00C2FF, blue);
+    background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
     display: sticky;
     transition: all 0.3s;
 }
 
 .user-add-btn:hover {
-    background-image: linear-gradient(-45deg, #00C2FF, blue);
+    background-image: linear-gradient(-45deg, #ffdc7d, rgb(255, 170, 0));
     scale: 1.1;
 }
 
@@ -333,17 +333,17 @@
 }
 
 .card-body .btn-warning:hover {
-    color: #1547C8;
+    color: rgb(255, 170, 0);
     background-color: white;
     scale: 1.2;
-    border: solid 1px #1547C8;
+    border: solid 1px rgb(255, 170, 0);
 }
 
 .card-body .btn-danger:hover {
-    color: #1547C8;
+    color: rgb(255, 170, 0);
     background-color: white;
     scale: 1.2;
-    border: solid 1px #1547C8;
+    border: solid 1px rgb(255, 170, 0);
 }
 
 .card-body hr {
@@ -377,7 +377,7 @@
 }
 
 .nav-layout .fa-user {
-    color: #010094;
+    color: rgb(255, 170, 0);
     width: 60px;
     height: 60px;
     margin-left: 2%;
@@ -390,4 +390,20 @@
 
 .card-btn a {
     text-align: center;
+}
+
+.line-fill {
+    color: white;
+}
+
+.page-link.active {
+    background-color: rgb(255, 170, 0);
+    border: solid 1px rgb(255, 170, 0);
+    transition: all .4s;
+}
+
+.page-link.active:hover {
+    color: rgb(255, 170, 0);
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(255, 170, 0);
 }

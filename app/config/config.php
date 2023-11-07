@@ -1,6 +1,6 @@
 <?php 
 
-define('BASEURL', 'http://localhost/inventaria-project/public/');
+define('BASEURL', 'http://localhost/inventaria-project/public');
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

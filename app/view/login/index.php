@@ -11,7 +11,7 @@
                         
                         <div class="input-box">
                             <div class="text-center">
-                                <img src="<?= BASEURL ?>/img/Logo.svg" alt="">
+                                <img src="<?= BASEURL ?>/img/inven_logo.svg" alt="">
                             </div>
                             <h1>Inventaria App</h1>
 

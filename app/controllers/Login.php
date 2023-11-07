@@ -13,13 +13,12 @@ class Login extends Controller{
         if (!empty($_SESSION['status'])){
 
             if($_SESSION['status'] == 1){
-                header('location: '. BASEURL . '/multiuser/admin');
+                header('location: '. BASEURL . '/multipage/admin');
 
             }else if($_SESSION['status'] == 2){
-                header('location: '. BASEURL . '/multiuser/user');
+                header('location: '. BASEURL . '/multipage/user');
             }
         }
-        // var_dump($_SESSION['status']);
 
         $this->view('tamplates/headerlogin', $data);
         $this->view('login/index', $data);
@@ -55,10 +54,10 @@ class Login extends Controller{
                     // var_dump($_SESSION['status']);
 
                     if($_SESSION['status'] == 1){
-                        header('location: '. BASEURL . '/multiuser/admin');
+                        header('location: '. BASEURL . '/multipage/admin');
 
                     }else if($_SESSION['status'] == 2){
-                        header('location: '. BASEURL . '/multiuser/user');
+                        header('location: '. BASEURL . '/multipage/user');
 
                     }
 

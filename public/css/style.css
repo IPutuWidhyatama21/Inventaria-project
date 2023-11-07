@@ -74,7 +74,7 @@
     border-radius: 20px;
     transition: .4s; 
     font-weight: bold;
-    background-image: linear-gradient(to right, #00C2FF, #1547C8);
+    background-image: linear-gradient(to right, #ffdc7d, rgb(255, 170, 0));
     color: white;
 }
 .submit:hover {
@@ -97,6 +97,9 @@ span a:hover {
     color: #000;
 }
 
+.input-box img {
+    width: 40%;
+}
 
 /* Responsive */
 
