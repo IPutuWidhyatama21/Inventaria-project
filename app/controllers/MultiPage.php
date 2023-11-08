@@ -81,22 +81,48 @@ class MultiPage extends Controller{
         }
     }
 
-    public function editbarang()
+    public function editbarang($id_barang)
     {
 
-        // Percobaan Membuat Controllers editbarang
-        // var_dump($_POST);
-        // if ($this->model('Barang_model')->editDataBarang($_POST) > 0){
-        //     header('location: '. BASEURL.'/adminpage');
-        //     exit;
-        // }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $namaBarang = $_POST['namaBarang'];
+            $rak = $_POST['idRak'];
+            $keterangan = $_POST['keterangan'];
+            $kolom = $_POST['jumlahKolom'];
+            $stok = $_POST['stok'];
+    
+            $data = [
+                'id_barang' => $id_barang,
+                'namaBarang' => $namaBarang,
+                'rak' => $rak,
+                'keterangan' => $keterangan,
+                'kolom' => $kolom,
+                'stok' => $stok
+            ];
+    
+            if ($this->model('Barang_model')->editDataBarang($data['id_barang'], $data['namaBarang'], $data['rak'], $data['keterangan'], $data['kolom'], $data['stok'])) {
+                // Handle update success
+                header('Location: ' . BASEURL . '/multipage/admin');
+                exit;
+
+            } else {
+                // Handle update failure
+                echo 'Gagal Memperbaharui Barang.';
+            }
+
+        } else {
 
         $data['judul'] = 'Edit Barang';
         $data['activeItem'] = 'active-item';
+        $data['databarang'] = $this->model('Barang_model')->getDataById($id_barang);
+        $data['rakData'] = $this->model('Rak_model')->queryRak();
 
         $this->view('tamplates/headerAdmin', $data);
         $this->view('adminpage/editbarang', $data);
         $this->view('tamplates/footer');
+
+        }
     }
 
     public function tambahBarang()

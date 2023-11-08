@@ -38,14 +38,46 @@ class AdminPage extends Controller{
         }
     }
 
-    public function editbarang()
+    public function editbarang($id_barang)
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $namaBarang = $_POST['namaBarang'];
+            $rak = $_POST['idRak'];
+            $keterangan = $_POST['keterangan'];
+            $kolom = $_POST['jumlahKolom'];
+            $stok = $_POST['stok'];
+    
+            $data = [
+                'id_barang' => $id_barang,
+                'namaBarang' => $namaBarang,
+                'rak' => $rak,
+                'keterangan' => $keterangan,
+                'kolom' => $kolom,
+                'stok' => $stok
+            ];
+    
+            if ($this->model('Barang_model')->editDataBarang($data['id_barang'], $data['namaBarang'], $data['rak'], $data['keterangan'], $data['kolom'], $data['stok'])) {
+                // Handle update success
+                header('Location: ' . BASEURL . '/multipage/admin');
+                exit;
+
+            } else {
+                // Handle update failure
+                echo 'Gagal Memperbaharui Barang.';
+            }
+
+        } else {
+
         $data['judul'] = 'Edit Barang';
         $data['activeItem'] = 'active-item';
+        $data['databarang'] = $this->model('Barang_model')->getDataById($id_barang);
 
         $this->view('tamplates/headerAdmin', $data);
         $this->view('adminpage/editbarang', $data);
         $this->view('tamplates/footer');
+
+        }
     }
 
     public function tambahBarang()

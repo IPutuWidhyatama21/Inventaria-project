@@ -41,8 +41,8 @@
                                         <div class="card-footer">
                                             <div class="float-start">
                                                 <div class="tombol">
-                                                <a href="<?= BASEURL ?>/multipage/editbarang" class="btn btn-warning justify-content-center"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
-                                                <a href="<?= BASEURL ?>/multipage/deleteBarang/<?= $rowBarang['id_barang'] ?>"  onclick="return confirm('Yakin Barang Ingin Dihapus?')" class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></a>
+                                                    <a href="<?= BASEURL ?>/multipage/editbarang/<?= $rowBarang['id_barang'] ?>" class="btn btn-warning justify-content-center edit-btn"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                                                    <a href="<?= BASEURL ?>/multipage/deleteBarang/<?= $rowBarang['id_barang'] ?>"  onclick="return confirm('Yakin Barang Ingin Dihapus?')" class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,11 +88,12 @@
                         <!-- Pagination End -->
 
                     <!-- Button trigger modal -->
-                    <div class="d-flex justify-content-end btn-add position-absolute bottom-0 end-0">
+                    <div class="d-flex justify-content-end btn-add fixed-bottom ">
                         <button type="button" class="btn btn-add btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
+                    
                     
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -131,7 +132,7 @@
                                 </div>
                                 </div>
                                 <br>
-                                <form action="<?= BASEURL ?>/multipage/tambahBarang" method="post">
+                                <form action="<?= BASEURL ?>/multipage/tambahBarang" method="post" enctype="multipart/form-data">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -158,7 +159,7 @@
                                                 <select name="idRak" class="form-select" aria-label="Default select example" id="inputRakbarang" onchange="getSelectedValue();">
 
                                                     <?php foreach ( $data['rakData'] as $rowRak) : ?>
-                                                    <option value="<?= $rowRak['id_rak'] ?>" ><?= $rowRak['nama_rak'] ?></option>
+                                                        <option value="<?= $rowRak['id_rak'] ?>" ><?= $rowRak['nama_rak'] ?></option>
                                                     <?php endforeach; ?>
 
                                                 </select>
@@ -170,6 +171,8 @@
                                                 <select class="form-select" aria-label="Default select example" id="inputKolombarang" name="jumlahKolom">
                                                 
                                                 <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
 
                                                 <?php foreach ( $data['kolom'] as $rowKolom) : ?>
                                                     <?= $i = 1; $i++; $i <= $rowKolom['jumlah_kolom'] ?>
