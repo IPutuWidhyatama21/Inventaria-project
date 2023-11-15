@@ -96,10 +96,10 @@ class Barang_model {
         return $this->db->rowCount();
     }
 
-    public function getDataById($id_barang) {
+    public function getDataById($id) {
 
         $this->db->query('SELECT * FROM ' . $this->tabel . " INNER JOIN rak ON " . $this->tabel .".id_rak = rak.id_rak WHERE " . $this->tabel . ".id_barang = :id_barang");
-        $this->db->bind('id_barang', $id_barang);
+        $this->db->bind('id_barang', $id);
         return $this->db->singel();
 
     }
@@ -189,6 +189,18 @@ class Barang_model {
 
         $this->db->execute();
         return $this->db->rowCount();
+    }
+
+    public function getValueIdData($id) {
+        $this->db->query('SELECT * FROM ' . $this->tabel . " INNER JOIN rak ON " . $this->tabel .".id_rak = rak.id_rak WHERE " . $this->tabel . ".id_barang = :id");
+        $this->db->bind('id', $id); 
+        return $this->db->singel();
+    }
+
+    public function QueryJumlahKolom($IdBarang) {
+        $this->db->query('SELECT * FROM ' . $this->tabel . " INNER JOIN rak ON " . $this->tabel .".id_rak = rak.id_rak WHERE " . $this->tabel . ".id_barang = :id");
+        $this->db->bind('id', $idBarang); 
+        return $this->db->singel();
     }
 
 

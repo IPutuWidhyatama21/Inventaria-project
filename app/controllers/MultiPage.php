@@ -27,7 +27,6 @@ class MultiPage extends Controller{
        $data['judul'] = 'Dashboard';
        $data['barang'] = $this->model('Barang_model')->getAllBarang();
        $data['rakData'] = $this->model('Rak_model')->queryRak();
-    //    $data['kolom'] = $this->model('Rak_model')->querySelectBertingkat();
 
        $data['activeItem'] = 'active-item';
         
@@ -125,6 +124,24 @@ class MultiPage extends Controller{
         }
     }
 
+    public function getValueId($idValue) {
+        header('Content-Type: application/json');
+        $data = $this->model('Barang_model')->getValueIdData($idValue);
+        echo json_encode($data);
+    }
+
+    public function getValueRak($ValueRak) {
+        header('Content-Type: application/json');
+        $dataValueRak = $this->model('Rak_model')->getValueRakData($ValueRak);
+        echo json_encode($dataValueRak);
+    }
+
+    public function QueryKolom($IdBarang) {
+        header('Content-Type: application/json');
+        $DataQueryKolom = $this->model('Barang_model')->QueryJumlahKolom($IdBarang);
+        echo json_encode($DataQueryKolom);
+    }
+
     public function tambahBarang()
     {
         if( $this->model('Barang_model')->tambahDataBarang($_POST) ) {
@@ -161,9 +178,10 @@ class MultiPage extends Controller{
         }
     }
 
-    public function selectbertingkat(){
-        $this->model('Rak_model')->queryselectbertingkat();
+    public function QueryRak() {
+        header('Content-Type: application/json');
+        $data = $this->model('Rak_model')->queryRak();
+        echo json_encode($data);
     }
-
 
 }

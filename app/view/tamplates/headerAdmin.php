@@ -8,6 +8,8 @@
       <link href="<?= BASEURL ?>/fontawesome/css/all.min.css" rel="stylesheet">
       <link href="<?= BASEURL ?>/css/merge1.css" rel="stylesheet">
       <!-- <link rel="stylesheet" href="/css/style.css"> -->
+
+      <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     </head>
     <body>
 

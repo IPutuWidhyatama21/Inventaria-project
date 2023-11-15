@@ -25,7 +25,7 @@
                             <form action="" method="post">
                                     <div class="container-sm form-edit">
                                         <div class="mb-3">
-                                            <input type="hidden" name="id_blog" value="<?= $data['databarang']['id_barang']; ?>">
+                                            <input type="hidden" name="id_barang" value="<?= $data['databarang']['id_barang']; ?>">
                                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nama Barang" name="namaBarang" value="<?= $data['databarang']['nama_barang'] ?>">
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                                             <?php foreach ( $data['rakData'] as $rowRak) : ?>
                                                 <option value="<?= $rowRak['id_rak'] ?>"><?= $rowRak['nama_rak'] ?></option>
                                             <?php endforeach; ?>
-                                            
+
                                         </select>
                                     </div>
                                     <div class="container-sm form-edit2">
