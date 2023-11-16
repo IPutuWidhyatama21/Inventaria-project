@@ -31,15 +31,13 @@ class Barang_model {
         return $this->db->resultSet();
     }
 
-    public function tambahDataBarang($dataBarang)
-    {
-
-        function uploadGambar()
+    public function uploadGambar()
         {
             $namaFile = $_FILES['gambarBarang']['name'];
             $ukuranFile = $_FILES['gambarBarang']['size'];
             $errorFile = $_FILES['gambarBarang']['error'];
             $tmpNameFile = $_FILES['gambarBarang']['tmp_name'];
+            $gambar = [];
 
             // cek apakah gambar diupload atau tidak 
             if ( $errorFile === 4 ){
@@ -78,7 +76,9 @@ class Barang_model {
             return $namaFileBaru;
         }
 
-        $gambar = uploadGambar();
+    public function tambahDataBarang($dataBarang) {
+
+        $gambar = $this->uploadGambar();
 
         $query = "INSERT INTO barang 
                     VALUES (
@@ -96,73 +96,28 @@ class Barang_model {
         return $this->db->rowCount();
     }
 
-    public function getDataById($id) {
-
-        $this->db->query('SELECT * FROM ' . $this->tabel . " INNER JOIN rak ON " . $this->tabel .".id_rak = rak.id_rak WHERE " . $this->tabel . ".id_barang = :id_barang");
-        $this->db->bind('id_barang', $id);
-        return $this->db->singel();
-
-    }
-
     // Percobaan Membuat Model Edit Barang
-    public function editDataBarang($id_barang, $namaBarang, $rak, $keterangan, $kolom, $stok)
+    public function editDataBarang($id_barang, $namaBarang, $rak, $gambar, $keterangan, $kolom, $stok)
     {
 
-        // function uploadGambar()
-        // {
-        //     $namaFile = $_FILES['gambarBarang']['name'];
-        //     $ukuranFile = $_FILES['gambarBarang']['size'];
-        //     $errorFile = $_FILES['gambarBarang']['error'];
-        //     $tmpNameFile = $_FILES['gambarBarang']['tmp_name'];
-
-        //     // cek apakah gambar diupload atau tidak 
-        //     if ( $errorFile === 4 ){
-        //         echo "<script>
-        //                 alert('Masukkan gambar terlebih dahulu!');
-        //             </script>";
-        //             return false;
-        //     }
-
-        //     // cek apakah yang diupload adalah gambar
-        //     $ekstensiGambarValid = ['jpg','png','jpeg'];
-        //     $ekstensiGambar = explode('.', $namaFile);
-        //     $ekstensiGambar = strtolower(end($ekstensiGambar));
-
-        //     if( !in_array($ekstensiGambar, $ekstensiGambarValid) ) {
-        //         echo "<script>
-        //                 alert('Yang anda masukan bukan gambar!');
-        //             </script>";
-        //             return false;
-        //     }
-
-        //     // cek ukuran gambar 
-        //     if( $ukuranFile > 100000000 ) {
-        //         echo "<script>
-        //                 alert('Ukuran gambar terlalu besar!');
-        //             </script>";
-        //             return false;
-        //     }
-
-        //     // lolos pengechekan, generate nama baru, gambar siap di upload
-        //     $namaFileBaru = uniqid();
-        //     $namaFileBaru .= '.';
-        //     $namaFileBaru .= $ekstensiGambar;
-        //     move_uploaded_file($tmpNameFile, 'img/image_upload/' . $namaFileBaru);
-
-        //     return $namaFileBaru;
-        // }
-
-        // if( $_FILES['gambarBarang']['error'] == 4 ) {
-        //     $gambar = $gambar;
-        // } else {
-        //     $gambar = uploadGambar();
-        // }
+        // // Check if 'gambarBarang' key exists in $_FILES array
+        if (isset($_FILES['gambarBarang']) && $_FILES['gambarBarang']['error'] == 4) {
+           $gambar = $_POST;
+        } else {
+            // Perform image upload only if 'gambarBarang' is set and there is no error
+            if (isset($_FILES['gambarBarang']) && $_FILES['gambarBarang']['error'] !== 4) {
+                $gambar = $this->uploadGambar();
+            } else {
+                $gambar = $_FILES['gambarBarang'];
+            }
+        }
 
         $query = "UPDATE barang 
                 SET nama_barang = :namaBarang, 
                     keterangan = :keterangan, 
-                    stok = :stok, 
-                    id_rak = :idRak, 
+                    stok = :stok,
+                    id_rak = :idRak,
+                    gambar = :gambar, 
                     kolom = :kolom
                 WHERE id_barang = :id_barang";
 
@@ -171,7 +126,7 @@ class Barang_model {
         $this->db->bind('keterangan', $keterangan);
         $this->db->bind('stok', $stok);
         $this->db->bind('idRak', $rak);
-        // $this->db->bind('gambar', $data['gambar']);
+        $this->db->bind('gambar', $gambar);
         $this->db->bind('kolom', $kolom);
         $this->db->bind('id_barang', $id_barang);
 

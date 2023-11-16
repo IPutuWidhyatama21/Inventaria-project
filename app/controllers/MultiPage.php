@@ -2,6 +2,18 @@
 
 class MultiPage extends Controller{
 
+    // Function Parse URL
+    public function parseURL()
+    {
+        if( isset($_GET['url']) ) {
+            $url = rtrim($_GET['url'], '/');
+            $url = filter_var($url, FILTER_SANITIZE_URL);
+            $url = explode('/', $url);
+            return $url;
+        }
+    }
+    // End Function Parse URL
+
     public function admin()
     {
         $data['judul'] = 'Admin';
@@ -80,13 +92,15 @@ class MultiPage extends Controller{
         }
     }
 
-    public function editbarang($id_barang)
+    public function editbarang()
     {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $id_barang = $_POST['id_barang'];
             $namaBarang = $_POST['namaBarang'];
             $rak = $_POST['idRak'];
+            $gambar = isset($_FILES['gambarBarang']) ? $_FILES['gambarBarang'] : null;
             $keterangan = $_POST['keterangan'];
             $kolom = $_POST['jumlahKolom'];
             $stok = $_POST['stok'];
@@ -95,12 +109,13 @@ class MultiPage extends Controller{
                 'id_barang' => $id_barang,
                 'namaBarang' => $namaBarang,
                 'rak' => $rak,
+                'gambar' => $gambar,
                 'keterangan' => $keterangan,
                 'kolom' => $kolom,
                 'stok' => $stok
             ];
     
-            if ($this->model('Barang_model')->editDataBarang($data['id_barang'], $data['namaBarang'], $data['rak'], $data['keterangan'], $data['kolom'], $data['stok'])) {
+            if ($this->model('Barang_model')->editDataBarang($data['id_barang'], $data['namaBarang'], $data['rak'], $data['gambar'], $data['keterangan'], $data['kolom'], $data['stok'])) {
                 // Handle update success
                 header('Location: ' . BASEURL . '/multipage/admin');
                 exit;
@@ -109,17 +124,6 @@ class MultiPage extends Controller{
                 // Handle update failure
                 echo 'Gagal Memperbaharui Barang.';
             }
-
-        } else {
-
-        $data['judul'] = 'Edit Barang';
-        $data['activeItem'] = 'active-item';
-        $data['databarang'] = $this->model('Barang_model')->getDataById($id_barang);
-        $data['rakData'] = $this->model('Rak_model')->queryRak();
-
-        $this->view('tamplates/headerAdmin', $data);
-        $this->view('adminpage/editbarang', $data);
-        $this->view('tamplates/footer');
 
         }
     }
@@ -182,6 +186,131 @@ class MultiPage extends Controller{
         header('Content-Type: application/json');
         $data = $this->model('Rak_model')->queryRak();
         echo json_encode($data);
+    }
+
+    public function queryDataRak($id) {
+
+    }
+
+
+    // Manage User Function
+    public function manageuser() {
+
+        $url = $this->parseURL();
+        $getactivePage = isset($url[1]) ? $url[1] : null;
+        $limitdata = 4;
+        $jumlahDataUser = $this->model('ManageUser_model')->countallUsername();
+        $jumlahHalaman = ceil($jumlahDataUser / $limitdata);
+        $activePage = (isset($getactivePage) && is_numeric($getactivePage)) ? $getactivePage : 1;
+        $awalData = ($activePage - 1) * $limitdata;
+
+        $data['UserName'] = $this->model('ManageUser_model')->getAllUser($awalData, $limitdata);
+        $data['judul'] = 'Manage User';
+        $data['activepage'] = $activePage;
+        $data['jumlahHalaman'] = $jumlahHalaman;
+
+        $data['activeItem'] = 'active-item';
+
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/manageusers', $data);
+        $this->view('tamplates/footer');
+    }
+
+    public function deleteUser($id) {
+
+        if( $this->model('ManageUser_model')->deleteDataUser($id) ){
+            header('Location: ' . BASEURL . '/multipage/manageuser');
+        }
+
+    }
+
+    public function adduser() {
+       
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Handle form submission
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            require_once __DIR__ . '/../model/ManageUser_model.php';
+            $model = new ManageUser_model();
+            $success = $model->addUser($username, $password);
+
+            if ($success) {
+                // User added successfully, you can redirect or show a success message here
+                echo "<script>
+                alert('User added successfully!');
+                    window.location.href = 'manageuser';
+                </script>
+                ";
+            } else {
+                // Handle errors
+                echo "<script>
+                alert('Failed to add user');
+                </script>
+                ";
+            }
+        }
+
+        $data['judul'] = 'Manage User';
+
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/manageuser');
+        $this->view('tamplates/footer');
+
+    }
+
+    public function useredit() {
+
+        $url = $this->parseURL();
+        $id_user = $url[2];
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $username = $_POST['Username'];
+            $Password = $_POST['Password'];
+            $RePassword = $_POST['RePassword'];  
+            $url = $this->parseURL();
+            $id_user = $url[2];           
+            if($Password == $RePassword) {
+
+                var_dump($username,$Password,$RePassword,$id_user);
+                require_once __DIR__ . '/../model/ManageUser_model.php';
+                $model = new ManageUser_model();
+                $success = $model->updateUser($username, $Password, $id_user);
+
+                
+                if ($success) {
+                    // User added successfully, you can redirect or show a success message here
+                    echo "<script>
+                    alert('User Update Successfully!');
+                    window.location.href = '/inventaria-project/public/multipage/manageuser/';
+                    </script>
+                    ";
+                } else {
+                    // Handle errors
+                    echo "<script>
+                    alert('Failed to Update User');
+                    window.location.href = '/inventaria-project/public/multipage/manageuser/';
+    
+                    </script>
+                    ";
+                }
+            } else {
+                echo "<script>
+                alert('Failed to Update User because Password and Re-Password are Not Match');
+                window.location.href = '/inventaria-project/public/multipage/manageuser/';
+
+                </script>
+                ";
+            }
+        }
+
+        $data['UserName'] = $this->model('ManageUser_model')->getUserbyId($id_user);
+        $data['judul'] = 'Manage User';
+        $data['activeItem'] = 'active-item';
+
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/useredit', $data);
+        $this->view('tamplates/footer');
     }
 
 }

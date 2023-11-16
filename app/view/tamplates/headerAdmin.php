@@ -27,13 +27,13 @@
                             <div class="menu-design d-flex flex-column">
                                 <div class="dasboard-design">
                                     <hr class="line-fill">
-                                    <a href="<?= BASEURL ?>/mutlipage" class="dasboard <?= $data['activeItem'] ?>">
+                                    <a href="<?= BASEURL ?>/mutlipage/admin" class="dasboard <?= $data['activeItem'] ?>">
                                         <i class="fa-solid fa-gauge"></i>
                                         Dashboard
                                     </a>
                                     <hr class="line-fill">
                                 </div>
-                                <a href="<?= BASEURL ?>/manageuser" class="manage-user <?= $data['activeItem'] ?>">
+                                <a href="<?= BASEURL ?>/multipage/manageuser" class="manage-user <?= $data['activeItem'] ?>">
                                     <i class="fa-solid fa-circle-user"></i>
                                     Manage Users
                                 </a>

@@ -13,7 +13,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-end profile-layout">
-                                    <p>User</p>
+                                    <p>Admin</p>
                                     <i class="fa-solid fa-circle-user"></i>
                                 </div>
                             </div>
@@ -28,9 +28,9 @@
                         <div class="row row-cols-1 row-cols-md-3 g-4">
                             <?php foreach ( $data['barang'] as $rowBarang ) : ?>
                                 <div class="col p-4">
-                                    <div class="card h-100">
-                                        <img src="<?= BASEURL ?>/img/image_upload/<?= $rowBarang['gambar'] ?>" alt="Item">
-                                        <div class="card-body">
+                                    <div class="card h-100 ">
+                                        <img src="<?= BASEURL ?>/img/image_upload/<?= $rowBarang['gambar'] ?>" class="rounded" alt="Item">
+                                        <div class="card-body rounded">
                                         <h5 class="card-title text-center mb-2"><?= $rowBarang['nama_barang'] ?> </h5>
                                         <p class="card-text">Rak : <?= $rowBarang['nama_rak'] ?> </p>
                                         <p class="card-text">Keterangan : <?= $rowBarang['keterangan'] ?> </p>
@@ -156,17 +156,7 @@
                                                 <div class="mb-3 row">
                                                     <label for="inputRak" class="col-sm-4 col-form-label">Rak :</label>
                                                     <div class="col-sm-7">
-                                                        <select name="idRak" class="form-select" aria-label="Default select example" id="inputRakbarang" onchange="getSelectedValue();">
-
-                                                            <?php foreach ( $data['rakData'] as $rowRak) : ?>
-                                                                <option value="<?= $rowRak['id_rak'] ?>" ><?= $rowRak['nama_rak'] ?></option>
-                                                            <?php endforeach; ?>
-
-                                                            <form action="<?= BASEURL ?>/multipage/selectbertingkat" method="POST" id="ValueForm">
-                                                                <input type="hidden" name="idrak" id="IDRAK" value="">
-                                                                <button id="ValueBtn" class="value-btn" onclick="SubmitForm()"></button>
-                                                            </form>
-
+                                                        <select name="idRak" class="form-select" aria-label="Default select example" id="inputRakbarang">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -174,16 +164,9 @@
                                                     <label for="inputKolom" class="col-sm-4 col-form-label">Kolom :</label>
                                                     <div class="col-sm-7">
                                                         <select class="form-select" aria-label="Default select example" id="inputKolombarang" name="jumlahKolom">
-                                                        
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-
-                                                        <?php foreach ( $data['kolom'] as $rowKolom) : ?>
-                                                            <?= $i = 1; $i++; $i <= $rowKolom['jumlah_kolom'] ?>
-                                                            <option value="<?= $rowKolom['id_rak'] ?>" ><?= $i ?></option>
-                                                        <?php endforeach; ?>
-
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -230,17 +213,19 @@
                                     <div class="row">
                                             <div class="col-md-6">
                                                 <div class="container-img">
-                                                    <img class="img-brg" src="" alt="" id="gambar">
+                                                    <div id="PreviewImg">
+                                                        <img class="img-brg" src="" alt="" id="gambar">
+                                                    </div>
                                                     <div class="file-form mb-3">
-                                                        <label for="choose" class="btn btn-warning">
+                                                        <label for="EditChoose" class="btn btn-warning">
                                                             <i class="fa-solid fa-camera"></i>
                                                         </label>
-                                                        <input class="form-control form-control-sm" id="choose" type="file" name="gambarBarang">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <form action="" method="post">
+                                                <form action="<?=BASEURL?>/multipage/editbarang" method="post" enctype="multipart/form-data" class="form-edit">
+                                                        <input class="form-control form-control-sm" id="EditChoose" type="file" name="gambarBarang">
                                                         <div class="container-sm form-edit">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_barang" value="" id="editIdBarang">
@@ -282,7 +267,7 @@
                             </div>
                         </div>
                     </div>
-            
+                    <!-- End Modal Edit -->
         </div>
     </div>
 </div>

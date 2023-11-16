@@ -182,15 +182,15 @@
 }
 
 .container-img {
-    width: 70%;
-    height: 85%;
+    width: 30vh;
+    height: 30vh;
     margin-left: 20%;
     margin-top: 8%;
 }
 
 .container-img .img-brg {
-    width: 70%;
-    height: 80%;
+    width: 30vh;
+    height: 30vh;
     margin-left: 9%;
     border-radius: 100%!important;
 }
@@ -207,14 +207,14 @@
     z-index: -1;
     margin-top: -9%;
 }
-.file-form input[type="file"] {
+.form-edit input[type="file"] {
     display: none;
 }
 
 .file-form label {
     cursor: pointer;
     border-radius: 100%;
-    margin-top: 3%;
+    margin-left: 33px;
     width: 50px;
     height: 50px;
     background-image: linear-gradient(145deg, #ffdc7d, rgb(255, 170, 0));
@@ -279,7 +279,7 @@
 }
 
 .card img {
-    height: 100%;
+    height: 35vh;
 }
 
 .btn-search {
@@ -426,4 +426,8 @@
 
 .value-btn {
     display: none;
+}
+
+.card-user img {
+    height: 100%;
 }

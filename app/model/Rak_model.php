@@ -10,7 +10,7 @@ class Rak_model {
     }
 
     public function tambahRak($data){
-        $query = "INSERT INTO rak VALUES ('',:nama_rak,:jumlah_kolom) ";
+        $query = "INSERT INTO rak VALUES (NULL,:nama_rak,:jumlah_kolom) ";
 
         $this->db->query($query);
         $this->db->bind('nama_rak',$data['namarak']);
@@ -28,7 +28,7 @@ class Rak_model {
     }
 
     public function getValueRakData($ValueRak) {
-        $this->db->query('SELECT * FROM ' . $this->tabel . " INNER JOIN barang ON " . $this->tabel .".id_rak = barang.id_rak WHERE " . $this->tabel .".id_rak = :id");
+        $this->db->query('SELECT * FROM ' . $this->tabel . " WHERE " . $this->tabel .".id_rak = :id");
         $this->db->bind('id', $ValueRak); 
         return $this->db->singel();
     }
