@@ -4,12 +4,12 @@
                     <div class="navbar-design shadow">
                         <div class="d-flex justify-content-between">
                             <div class="col-6">
-                                <div class="input-group search-layout">
-                                    <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <button class="btn btn-warning" type="button" id="button-addon2">
+                                <Form class="input-group search-layout" action="<?= BASEURL ?>/multipage/cari" method="post">
+                                    <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="keyword" aria-describedby="button-addon2">
+                                    <button class=" btn-search btn btn-warning" type="submit" id="button-addon2">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
-                                </div>
+                                </Form>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-end profile-layout">
@@ -61,7 +61,7 @@
                                 <ul class="pagination">
                                 <?php if ( $data['halaman_aktif'] > 1) : ?>
                                 <li class="page-item">
-                                    <a class="page-link" href="<?= BASEURL ?>/multipage/admin/<?= $data['halaman_aktif'] - 1 ?>" aria-label="Previous">
+                                    <a class="page-link" href="<?= BASEURL ?>/multipage/page/<?= $data['halaman_aktif'] - 1 ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
@@ -69,15 +69,15 @@
 
                                 <?php for ( $i = 1; $i <= $data['jumlah_halaman'] ; $i++ ) : ?>
                                 <?php if( $i == $data['halaman_aktif'] ) : ?>
-                                    <li class="page-item"><a class="page-link active" href="<?= BASEURL ?>/multipage/admin/<?= $i ?>"><?= $i ?></a></li>
+                                    <li class="page-item"><a class="page-link active" href="<?= BASEURL ?>/multipage/page/<?= $i ?>"><?= $i ?></a></li>
                                 <?php else : ?>
-                                    <li class="page-item"><a class="page-link" href="<?= BASEURL ?>/multipage/admin/<?= $i ?>"><?= $i ?></a></li>
+                                    <li class="page-item"><a class="page-link" href="<?= BASEURL ?>/multipage/page/<?= $i ?>"><?= $i ?></a></li>
                                 <?php endif; ?>
                                 <?php endfor; ?>
 
                                 <?php if( $data['halaman_aktif'] < $data['jumlah_halaman']) : ?>
                                 <li class="page-item">
-                                    <a class="page-link" href="<?= BASEURL ?>/multipage/admin/<?= $data['halaman_aktif'] + 1 ?>" aria-label="Next">
+                                    <a class="page-link" href="<?= BASEURL ?>/multipage/page/<?= $data['halaman_aktif'] + 1 ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

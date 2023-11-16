@@ -65,7 +65,7 @@
                         <ul class="pagination">
                           <li class="page-item">
                             <?php if ($data['activepage'] > 1) : ?>
-                                <a class="page-link" href="/inventaria-project/public/multipage/manageuser/" aria-label="Previous">
+                                <a class="page-link" href="/inventaria-project/public/multipage/pages/" aria-label="Previous">
                                   <span aria-hidden="true">&laquo;</span>
                                 </a>
                             <?php endif; ?>
@@ -73,18 +73,18 @@
                             <?php for( $i = 1; $i <= $data['jumlahHalaman']; $i++ ) : ?>
 	                            <?php if( $i == $data['activepage'] ) : ?>
                                 <li class="page-item">
-                                    <a class="page-link" href="/inventaria-project/public/multipage/manageuser/<?= $i; ?>"><?= $i; ?></a>
+                                    <a class="page-link" href="/inventaria-project/public/multipage/pages/<?= $i; ?>"><?= $i; ?></a>
                                     <li class="page-item">
                                 </li>
 	                            <?php else : ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="/inventaria-project/public/multipage/manageuser/<?= $i; ?>"><?= $i; ?></a>
+                                        <a class="page-link" href="/inventaria-project/public/multipage/pages/<?= $i; ?>"><?= $i; ?></a>
                                         <li class="page-item">
                                     </li>
 	                            <?php endif; ?>
                             <?php endfor; ?>
                             <?php if ($data['activepage'] < $data['jumlahHalaman']) : ?>
-                                <a class="page-link" href="/inventaria-project/public/multipage/manageuser/" aria-label="Next">
+                                <a class="page-link" href="/inventaria-project/public/multipage/pages/" aria-label="Next">
                                   <span aria-hidden="true">&raquo;</span>
                                 </a>
                             <?php endif; ?>

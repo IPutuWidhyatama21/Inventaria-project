@@ -158,6 +158,15 @@ class Barang_model {
         return $this->db->singel();
     }
 
+    public function queryCariData($keyword)
+    {
+        $this->db->query("SELECT * FROM " . $this->tabel . " INNER JOIN rak ON " . $this->tabel . ".id_rak = rak.id_rak" .
+        " WHERE nama_barang LIKE :keyword OR 
+                keterangan LIKE :keyword");
+        $this->db->bind('keyword', "%$keyword%");
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
 
 }
 

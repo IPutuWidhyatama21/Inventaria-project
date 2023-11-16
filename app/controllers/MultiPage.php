@@ -170,8 +170,8 @@ class MultiPage extends Controller{
         $data['rakData'] = $this->model('Rak_model')->queryRak();
         $data['activeItem'] = 'active-item';
 
-        $this->view('tamplates/header', $data);
-        $this->view('adminpage/index', $data);
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/index', $data);
         $this->view('tamplates/footer');
     }
 
@@ -191,6 +191,28 @@ class MultiPage extends Controller{
     public function queryDataRak($id) {
 
     }
+
+    public function cari()
+    {
+        $keyword = $_POST['keyword'];
+        // var_dump($keyword);
+        // die;
+        $batasHalaman = 3;
+        $jumlah_data = count($this->model('Barang_model')->queryCariData($keyword));
+        $data['halaman_aktif'] = (isset($idPages)) ? (int)$idPages : 1 ;
+        $halamanAwal = ( $batasHalaman * $data['halaman_aktif'] ) - $batasHalaman ;
+        $data['jumlah_halaman'] = ceil($jumlah_data / $batasHalaman);
+
+        $data['judul'] = 'Dashboard';
+        $data['barang'] = $this->model('Barang_model')->getAllBarangPage( $keyword, $halamanAwal, $batasHalaman );
+        $data['rakData'] = $this->model('Rak_model')->queryRak();
+        $data['activeItem'] = 'active-item';
+
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/index', $data);
+        $this->view('tamplates/footer');
+    }
+
 
 
     // Manage User Function
@@ -310,6 +332,29 @@ class MultiPage extends Controller{
 
         $this->view('tamplates/headerAdmin', $data);
         $this->view('AdminPage/useredit', $data);
+        $this->view('tamplates/footer');
+    }
+
+    public function pages()
+    {
+        // pagination
+        $url = $this->parseURL();
+        $getactivePage = isset($url[1]) ? $url[1] : null;
+        $limitdata = 4;
+        $jumlahDataUser = $this->model('ManageUser_model')->countallUsername();
+        $jumlahHalaman = ceil($jumlahDataUser / $limitdata);
+        $activePage = (isset($getactivePage) && is_numeric($getactivePage)) ? $getactivePage : 1;
+        $awalData = ($activePage - 1) * $limitdata;
+
+        $data['UserName'] = $this->model('ManageUser_model')->getAllUser($awalData, $limitdata);
+        $data['judul'] = 'Manage User';
+        $data['activepage'] = $activePage;
+        $data['jumlahHalaman'] = $jumlahHalaman;
+
+        $data['activeItem'] = 'active-item';
+
+        $this->view('tamplates/headerAdmin', $data);
+        $this->view('AdminPage/manageusers', $data);
         $this->view('tamplates/footer');
     }
 

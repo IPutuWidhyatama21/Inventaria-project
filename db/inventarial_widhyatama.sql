@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 01, 2023 at 07:11 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Nov 16, 2023 at 06:15 AM
+-- Server version: 8.1.0
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `barang` (
-  `id_barang` int(11) NOT NULL,
-  `nama_barang` varchar(25) NOT NULL,
-  `keterangan` varchar(150) NOT NULL,
-  `stok` int(11) NOT NULL,
-  `id_rak` int(11) NOT NULL,
-  `gambar` text NOT NULL,
-  `kolom` int(11) NOT NULL
+  `id_barang` int NOT NULL,
+  `nama_barang` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `stok` int NOT NULL,
+  `id_rak` int NOT NULL,
+  `gambar` text COLLATE utf8mb4_general_ci NOT NULL,
+  `kolom` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,7 +42,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `keterangan`, `stok`, `id_rak`, `gambar`, `kolom`) VALUES
-(4, 'Sendok', 'Besi', 10, 2, '6530b8f2c3309.jpeg', 1);
+(21, 'Sendok', 'Besi', 12, 3, '65558a9318c32.jpg', 6),
+(23, 'Piring', 'Barang Pecah Belah', 15, 3, '6555707b265fa.jpg', 5),
+(24, 'Cup Plastik', 'Plastik', 15, 1, '655563d62561b.jpg', 1),
+(25, 'Sendok 2', 'Besi', 20, 3, '6555af927d56a.jpg', 7);
 
 -- --------------------------------------------------------
 
@@ -51,9 +54,9 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `keterangan`, `stok`, `id_rak`
 --
 
 CREATE TABLE `rak` (
-  `id_rak` int(11) NOT NULL,
-  `nama_rak` varchar(25) NOT NULL,
-  `jumlah_kolom` int(11) NOT NULL
+  `id_rak` int NOT NULL,
+  `nama_rak` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah_kolom` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -62,7 +65,8 @@ CREATE TABLE `rak` (
 
 INSERT INTO `rak` (`id_rak`, `nama_rak`, `jumlah_kolom`) VALUES
 (1, 'A7', 5),
-(2, 'A1', 6);
+(2, 'A1', 6),
+(3, 'A01', 12);
 
 -- --------------------------------------------------------
 
@@ -71,10 +75,10 @@ INSERT INTO `rak` (`id_rak`, `nama_rak`, `jumlah_kolom`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` text NOT NULL,
-  `status` enum('2','1') NOT NULL
+  `id_user` int NOT NULL,
+  `username` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('2','1') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -83,9 +87,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `status`) VALUES
 (1, 'admin', '$2y$10$QVWc..K1HeFmZHfb4X/JzOdQGgWquJm2yOG4328yl6SNYsJHI/Noa', '1'),
-(2, 'Surya', '$2y$10$ekMs9WFojltG/P25H./u5OSeT39ToFBovpfpn3F/6NaklBjX64Dee', '2'),
-(3, 'Nanda', '$2y$10$r9y7cIhvw5otluNJjW.mzOQYDX2l.WpUhky0Bz0ycdVskfznECiaG', '2'),
-(5, 'Rama', '$2y$10$qT6aMnkDZrfGlXwpNf3ifeoN.MASWJDKq//5hL9AfUQtiBn6LcfdC', '2');
+(10, 'Rama', '$2y$10$IVaSKLBN7XBKoOYCNQdPfebucEITj3uMP/08HlLr48zdLtB5tZCZm', '2'),
+(11, 'Nanda', '$2y$10$Eo2b13MGpkAnwb26ASZ3DeiNBrG.JHBLPquJSxGq.2wven/8yw4NS', '2'),
+(14, 'Putra', '$2y$10$HtSWdK9mzyIpfm4bAonZF.wtlRt./9Xb7aoDNT08UcSS8B8Y5c1Fy', '2');
 
 --
 -- Indexes for dumped tables
@@ -118,19 +122,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `rak`
 --
 ALTER TABLE `rak`
-  MODIFY `id_rak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
